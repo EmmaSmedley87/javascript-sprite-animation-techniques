@@ -1,3 +1,9 @@
+let playerState = "sit";
+const dropdown = document.getElementById("animations");
+dropdown.addEventListener("change", function (e) {
+  playerState = e.target.value;
+});
+
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = (canvas.width = 600);
@@ -7,6 +13,7 @@ const playerImage = new Image();
 playerImage.src = "images/shadow_dog.png";
 const spriteWidth = 575;
 const spriteHeight = 523;
+
 let gameFrame = 0;
 const staggerFrames = 5;
 const spriteAnimations = [];
@@ -68,9 +75,10 @@ console.log(animationStates);
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   let position =
-    Math.floor(gameFrame / staggerFrames) % spriteAnimations["idle"].loc.length;
+    Math.floor(gameFrame / staggerFrames) %
+    spriteAnimations[playerState].loc.length;
   let frameX = spriteWidth * position;
-  let frameY = spriteAnimations["idle"].loc[position].y;
+  let frameY = spriteAnimations[playerState].loc[position].y;
   ctx.drawImage(
     playerImage,
     frameX,
@@ -87,3 +95,5 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
+
+// 41.34 video stopped.
